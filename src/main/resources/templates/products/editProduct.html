@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pl"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<div th:insert="~{dynamic/header}"></div>
+
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <div th:insert="~{dynamic/side-bar}"></div>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <div th:insert="~{dynamic/top-bar}"></div>
+            <!-- End of Topbar -->
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+
+                <form name="send" method="post" th:action="@{/updateProduct(id=${product.getId()})}" th:object="${product}"        >
+                    <!-- Begin Page Content -->
+                    <div class="container-fluid">
+
+                        <!-- Content Row -->
+                        <div class="row">
+                            <div class="col-xl-12 col-md-12 mb-12">
+                                <div class="card shadow mb-4">
+                                    <div class="card-header py-3">
+                                        <div class="form-group row">
+                                            <label for="title" class="col-2 col-form-label">Title</label>
+                                            <div class="col-10">
+                                                <input class="form-control" id="title" name="title" type="text" th:value="${product.getTitle()}" >
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="description" class="col-2 col-form-label">Description:</label>
+                                            <div class="col-10">
+                                            <textarea class="form-control" name="description" rows="5" id="description"
+                                                      th:value="${product.getDescription()}"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="icon" class="col-2 col-form-label">Icon</label>
+                                            <div class="col-10">
+                                                <input id="icon" class="form-control" name="icon" type="text" th:value="${product.getIcon()}">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="price" class="col-2 col-form-label">Price</label>
+                                            <div class="col-10">
+                                                <input id = "price" class="form-control" name="price" type="text" th:value="${product.getPrice()}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <input class="btn btn-success pull-left" type="submit" value="Save" id="saveButton"></input>
+
+
+                    </div>
+                    <!-- /.container-fluid -->
+                </form>
+
+
+            </div>
+            <!-- /.container-fluid -->
+
+
+            <div class="jumbotron">
+
+                <h1>Projekt zajęciowy</h1>
+                <p>Bootstrap + JSP + Spring Boot + MySQL</p>
+                <p>Dzisiaj jest: </p>
+            </div>
+
+
+
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <div th:insert="~{dynamic/footer}"></div>
+        <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+</body>
+
+</html>
