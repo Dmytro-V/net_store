@@ -1,6 +1,8 @@
 package com.netstore.home.controller;
 
+import com.netstore.home.model.Category;
 import com.netstore.home.model.Product;
+import com.netstore.home.service.CategoryService;
 import com.netstore.home.service.ProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +18,12 @@ import java.util.Optional;
 public class ProductController {
 
     private final ProductService productService;
+    private final CategoryService categoryService;
 
     @Autowired
-    public ProductController(ProductService productService) {
+    public ProductController(ProductService productService, CategoryService categoryService) {
         this.productService = productService;
+        this.categoryService = categoryService;
     }
 
     @GetMapping(value = {"/products"})
@@ -43,6 +47,9 @@ public class ProductController {
     public String editProductById(@RequestParam Long id, Model model) {
         log.info("in get update id: " + id);
 
+        List<Category> categoryList = categoryService.findAll();
+        model.addAttribute("categories", categoryList);
+
         Optional<Product> find = productService.findById(id);
         if (find.isPresent()) {
             model.addAttribute("product", find.get());
@@ -60,7 +67,9 @@ public class ProductController {
     }
 
     @GetMapping("/addProduct")
-    public String addProduct() {
+    public String addProduct(Model model) {
+        List<Category> categoryList = categoryService.findAll();
+        model.addAttribute("categories", categoryList);
         return "products/addProduct";
     }
 

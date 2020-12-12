@@ -9436,6 +9436,7 @@ a.bg-dark:focus, a.bg-dark:hover, button.bg-dark:focus, button.bg-dark:hover {
 
 .dropdown .dropdown-menu .dropdown-header, .sidebar .sidebar-heading, .text-uppercase {
     text-transform: uppercase !important
+
 }
 
 .text-capitalize {
