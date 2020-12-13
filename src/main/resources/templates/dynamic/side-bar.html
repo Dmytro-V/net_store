@@ -25,6 +25,14 @@
                 <span>Home</span></a>
         </li>
 
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Products
+        </div>
+
         <!-- Nav Item - Products -->
         <li class="nav-item active">
             <a class="nav-link"th:href="@{/products}">
@@ -39,34 +47,26 @@
                 <span>Add product</span></a>
         </li>
 
-        <!-- Nav Item - Kursanci -->
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Categories
+        </div>
+
+        <!-- Nav Item - Categories -->
         <li class="nav-item">
-            <a class="nav-link" href='#'>
+            <a class="nav-link" th:href="@{/categories}">
                 <i class="fas fa-users"></i>
-                <span>Kursanci</span></a>
+                <span>Categories</span></a>
         </li>
 
-        <!-- Nav Item - Kurs -->
+        <!-- Nav Item - AddCategory -->
         <li class="nav-item">
-            <a class="nav-link" href='#'>
+            <a class="nav-link" th:href="@{/addCategory}">
                 <i class="fas fa-laptop"></i>
-                <span>Kurs</span></a>
-        </li>
-
-
-        <!-- Nav Item - Tasks -->
-        <li class="nav-item">
-            <a class="nav-link" href='#'>
-                <i class="fas fa-clipboard-list"></i>
-                <span>Taski</span></a>
-        </li>
-
-
-        <!-- Nav Item - Technologie -->
-        <li class="nav-item">
-            <a class="nav-link" href='#'>
-                <i class="fas fa-cogs"></i>
-                <span>Technologie</span></a>
+                <span>Add category</span></a>
         </li>
 
         <!-- Divider -->
@@ -82,7 +82,7 @@
         <li class="nav-item">
             <a class="nav-link" href="#">
                 <i class="fas fa-angle-double-left"></i>
-                <span>Ocena</span></a>
+                <span>About</span></a>
 
         </li>
 

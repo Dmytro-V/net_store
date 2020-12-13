@@ -24,8 +24,8 @@ public class Category {
     private Category parent;
     @OneToMany
     private List<Category> child;
-
-    @OneToMany
-    private List<Product> products;
+//
+//    @OneToMany
+//    private List<Product> products;
 
 }

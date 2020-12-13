@@ -28,7 +28,7 @@
             <div class="container-fluid">
 
 
-                <form name="send" method="post" th:action="@{/addNewProduct}" th:object="${product}"        >
+                <form name="send" method="post" th:action="@{/addNewCategory}" th:object="${category}"        >
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
 
@@ -38,39 +38,19 @@
                                 <div class="card shadow mb-4">
                                     <div class="card-header py-3">
                                         <div class="form-group row">
-                                            <label for="category" class="col-2 col-form-label">Category</label>
+                                            <label for="parent" class="col-2 col-form-label">Parent category</label>
                                             <div class="col-10 dropdown">
-                                                <select class="form-control" id="category" name="category">
+                                                <select class="form-control" id="parent" name="parent">
                                                     <option th:each="category : ${categories}"  th:value="${category.getId()}">
                                                         <p th:text="${category.getName()}"></p>
                                                     </option>
                                                 </select>
-                                             </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="title" class="col-2 col-form-label">Title</label>
-                                            <div class="col-10">
-                                                <input class="form-control" id="title" name="title" type="text" placeholder="write title">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="description" class="col-2 col-form-label">Description:</label>
+                                            <label for="name" class="col-2 col-form-label">Name</label>
                                             <div class="col-10">
-                                                <textarea class="form-control" name="description" rows="5" id="description"
-                                                    placeholder="write description..."></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="icon" class="col-2 col-form-label">Icon</label>
-                                            <div class="col-10">
-                                                <input id="icon" class="form-control" name="icon" type="text" placeholder="write url icon">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label for="price" class="col-2 col-form-label">Price</label>
-                                            <div class="col-10">
-                                                <input id = "price" class="form-control" name="price" type="text" placeholder="0.00">
+                                                <input class="form-control" id="name" name="name" type="text" placeholder="write name">
                                             </div>
                                         </div>
                                     </div>
@@ -79,7 +59,6 @@
                         </div>
 
                         <input class="btn btn-success pull-left" type="submit" value="Add" id="addButton"></input>
-
 
                     </div>
                     <!-- /.container-fluid -->
