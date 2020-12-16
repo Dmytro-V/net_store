@@ -3,7 +3,7 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 
-<div th:insert="~{dynamic/header}"></div>
+<div th:replace="~{dynamic/header}"></div>
 
 <body id="page-top">
 
@@ -11,7 +11,7 @@
 <div id="wrapper">
 
     <!-- Sidebar -->
-    <div th:insert="~{dynamic/side-bar}"></div>
+    <div th:replace="~{dynamic/side-bar}"></div>
     <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
@@ -21,7 +21,7 @@
         <div id="content">
 
             <!-- Topbar -->
-            <div th:insert="~{dynamic/top-bar}"></div>
+            <div th:replace="~{dynamic/top-bar}"></div>
             <!-- End of Topbar -->
 
             <!-- Begin Page Content -->
@@ -41,9 +41,22 @@
                                             <label for="parent" class="col-2 col-form-label">Parent category</label>
                                             <div class="col-10 dropdown">
                                                 <select class="form-control" id="parent" name="parent">
-                                                    <option th:each="category : ${categories}"  th:value="${category.getId()}">
+                                                    <option value="">main category</option>
+                                                    <option th:each="category : ${categories}" th:if="${category.getParent()} == null" th:value="${category.getId()}">
                                                         <p th:text="${category.getName()}"></p>
                                                     </option>
+                                                    <optgroup th:each="category : ${categories}"
+                                                              th:if="${category.getParent()} == null"
+                                                              th:label="${category.getName()}">
+                                                            <option th:fragment="getTreeChildren (category)"
+                                                                    th:each="child : ${category.getChildren()}"
+                                                                    th:value="${child.getId()}">
+                                                                <p th:text="${child.getName()}"></p>
+                                                                <p th:insert="~{::getTreeChildren (${child})}">
+                                                            </option>
+
+                                                    </optgroup>
+
                                                 </select>
                                             </div>
                                         </div>
@@ -72,7 +85,7 @@
         <!-- End of Main Content -->
 
         <!-- Footer -->
-        <div th:insert="~{dynamic/footer}"></div>
+        <div th:replace="~{dynamic/footer}"></div>
         <!-- End of Footer -->
 
     </div>
@@ -82,7 +95,7 @@
 <!-- End of Page Wrapper -->
 
 <!-- scripts-->
-<div th:insert="~{dynamic/js}"></div>
+<div th:replace="~{dynamic/js}"></div>
 
 </body>
 

@@ -3,7 +3,7 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 
-<div th:insert="~{dynamic/header}"></div>
+<div th:replace="~{dynamic/header}"></div>
 
 <body id="page-top">
 
@@ -11,7 +11,7 @@
 <div id="wrapper">
 
     <!-- Sidebar -->
-    <div th:insert="~{dynamic/side-bar}"></div>
+    <div th:replace="~{dynamic/side-bar}"></div>
     <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
@@ -21,7 +21,7 @@
         <div id="content">
 
             <!-- Topbar -->
-            <div th:insert="~{dynamic/top-bar}"></div>
+            <div th:replace="~{dynamic/top-bar}"></div>
             <!-- End of Topbar -->
 
             <!-- Begin Page Content -->
@@ -67,7 +67,7 @@
         <!-- End of Main Content -->
 
         <!-- Footer -->
-        <div th:insert="~{dynamic/footer}"></div>
+        <div th:replace="~{dynamic/footer}"></div>
         <!-- End of Footer -->
 
     </div>
@@ -77,7 +77,7 @@
 <!-- End of Page Wrapper -->
 
 <!-- scripts-->
-<div th:insert="~{dynamic/js}"></div>
+<div th:replace="~{dynamic/js}"></div>
 
 </body>
 

@@ -3,6 +3,7 @@ package com.netstore.home.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.util.List;
@@ -23,7 +24,7 @@ public class Category {
     @OneToOne
     private Category parent;
     @OneToMany
-    private List<Category> child;
+    private List<Category> children;
 //
 //    @OneToMany
 //    private List<Product> products;
