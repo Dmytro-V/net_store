@@ -28,7 +28,7 @@
             <div class="container-fluid">
 
 
-                <form name="send" method="post" th:action="@{/updateProduct(id=${product.getId()})}" th:object="${product}"        >
+                <form name="send" method="post" th:action="@{/updateProduct(id=${product.getId()})}" th:object="${product}">
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
 
@@ -41,7 +41,7 @@
                                             <label for="category" class="col-2 col-form-label">Category</label>
                                             <div class="col-10">
                                                 <select class="form-control" id="category" name="category">
-                                                    <option th:selected="${product.getCategory().getId()}" th:text="${product.getCategory().getName()}"></option>
+                                                    <option th:selected="${product.getCategory().getId()}" th:text="${product.getCategory().getName()}" th:value="${product.getCategory().getId()}"></option>
                                                     <optgroup label=""></optgroup>
                                                     <option th:each="category : ${categories}"  th:value="${category.getId()}" >
                                                         <p th:text="${category.getName()}"></p>

@@ -10,4 +10,15 @@ public class MainController {
     public String getHome() {
         return "index";
     }
+
+    @GetMapping("/about")
+    public String getAbout() {
+        return "about";
+    }
+
+    @GetMapping("/auth/login")
+    public String getLoginPage() {
+        return "login";
+    }
+
 }

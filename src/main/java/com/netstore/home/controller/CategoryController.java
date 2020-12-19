@@ -1,10 +1,10 @@
 package com.netstore.home.controller;
 
 import com.netstore.home.model.Category;
-import com.netstore.home.model.Product;
 import com.netstore.home.service.CategoryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +26,7 @@ public class CategoryController {
 
 
     @GetMapping(value = {"/categories"})
+    @PreAuthorize("hasAuthority('read')")
     public String getCategories(Model model) {
         log.info("IN CategoryController getCategories");
         List<Category> categoriesList = categoryService.findAll();
@@ -35,6 +36,7 @@ public class CategoryController {
     }
 
     @GetMapping("/addCategory")
+    @PreAuthorize("hasAuthority('write')")
     public String addProduct(Model model) {
         log.info("IN CategoryController addCategory GET");
         List<Category> categoryList = categoryService.findAll();
@@ -43,6 +45,7 @@ public class CategoryController {
     }
 
     @PostMapping("/addNewCategory")
+    @PreAuthorize("hasAuthority('write')")
     public String addNewProduct(@ModelAttribute("category") final Category newCategory) {
         log.info("IN CategoryController POST addCategory with name: {}, parent: {}", newCategory.getName(), newCategory.getParent());
 

@@ -70,11 +70,9 @@
                 <a type="button" class="btn btn-info" th:href="@{/editProduct(id=${product.getId()})}">
                     Edit
                 </a>
-                <a type="button" class="btn btn-danger"  th:href="@{/deleteProduct(id=${product.getId()})}">
-                    Delete
-                </a>
-
-
+                <form th:action="@{/deleteProduct(id=${product.getId()})}" method="post">
+                    <button class="btn btn-danger" type="submit">Delete</button>
+                </form>
 
             </div>
             <!-- /.container-fluid -->

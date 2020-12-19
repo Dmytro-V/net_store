@@ -6,6 +6,7 @@ import com.netstore.home.service.CategoryService;
 import com.netstore.home.service.ProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +28,7 @@ public class ProductController {
     }
 
     @GetMapping(value = {"/products"})
+    @PreAuthorize("hasAuthority('read')")
     public String getProducts(Model model) {
         List<Product> productsList = productService.findAll();
         model.addAttribute("products", productsList);
@@ -34,6 +36,7 @@ public class ProductController {
     }
 
     @GetMapping("/viewProduct")
+    @PreAuthorize("hasAuthority('read')")
     public String getProductById(@RequestParam Long id, Model model) {
         Optional<Product> find = productService.findById(id);
         if (find.isPresent()) {
@@ -44,6 +47,7 @@ public class ProductController {
     }
 
     @GetMapping("/editProduct")
+    @PreAuthorize("hasAuthority('write')")
     public String editProductById(@RequestParam Long id, Model model) {
         log.info("in get update id: " + id);
 
@@ -59,6 +63,7 @@ public class ProductController {
     }
 
     @PostMapping("/updateProduct")
+    @PreAuthorize("hasAuthority('write')")
     public String updateProduct(@ModelAttribute("product") final Product newProduct, @RequestParam Long id) {
         log.info("in post update id: " + id);
         newProduct.setId(id);
@@ -67,6 +72,7 @@ public class ProductController {
     }
 
     @GetMapping("/addProduct")
+    @PreAuthorize("hasAuthority('write')")
     public String addProduct(Model model) {
         List<Category> categoryList = categoryService.findAll();
         model.addAttribute("categories", categoryList);
@@ -74,12 +80,14 @@ public class ProductController {
     }
 
     @PostMapping("/addNewProduct")
+    @PreAuthorize("hasAuthority('write')")
     public String addNewProduct(@ModelAttribute("product") final Product newProduct) {
         Product addedProduct = productService.saveProduct(newProduct);
         return "redirect:/viewProduct?id=" + addedProduct.getId();
     }
 
-    @GetMapping("/deleteProduct")
+    @PostMapping("/deleteProduct")
+    @PreAuthorize("hasAuthority('write')")
     public String deleteProduct(@RequestParam Long id) {
         productService.deleteProduct(id);
         return "redirect:/products";
