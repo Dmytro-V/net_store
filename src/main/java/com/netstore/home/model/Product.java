@@ -26,7 +26,8 @@ public class Product {
     private String icon;
     @Column(name = "price")
     private BigDecimal price;
-
     @ManyToOne
     private Category category;
+    @Column(name = "quantity")
+    private int quantity;
 }

@@ -10,10 +10,6 @@
 <!-- Page Wrapper -->
 <div id="wrapper">
 
-    <!-- Sidebar -->
-    <div th:replace="~{dynamic/side-bar}"></div>
-    <!-- End of Sidebar -->
-
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
 
@@ -21,11 +17,11 @@
         <div id="content">
 
             <!-- Topbar -->
-            <div th:replace="~{dynamic/top-bar}"></div>
+            <div th:insert="~{dynamic/top-bar::topbar}"></div>
             <!-- End of Topbar -->
 
             <!-- Begin Page Content -->
-            <div class="container-fluid">
+            <div class="container">
 
 
                 <!-- Content Row -->
@@ -33,7 +29,7 @@
 
                     <!-- Earnings (Monthly) Card Example -->
                     <div class="col-xl-3 col-md-6 mb-4" th:each="product : ${products}" >
-                        <a class="card border-left-primary shadow h-100 py-2" th:href="@{/viewProduct(id=${product.getId()})}">
+                        <a class="card border-left-primary shadow h-100 py-2" th:href="@{/viewProduct/{id}(id=${product.getId()})}">
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
@@ -46,6 +42,9 @@
                                         </div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800">
                                             Price: <p th:text="${product.getPrice()}"></p>
+                                        </div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                            Quantity: <p th:text="${product.getQuantity()}"></p>
                                         </div>
                                     </div>
                                     <div class="col-auto">

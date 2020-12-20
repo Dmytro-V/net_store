@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pl"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="~{dynamic/header}"></div>
+
+<body>
+    <!-- Topbar -->
+    <div th:insert="~{dynamic/top-bar::topbar}"></div>
+    <!-- End of Topbar -->
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+        <div class="container" style="max-width: 600px" >
+            <form class="needs-validation" novalidate method="post" th:action="@{/auth/login}">
+                <h2>Login</h2>
+                <p th:if="${loginError}" class="text-danger">Wrong email or password</p>
+                <div class="form-group">
+                    <label for="inputEmail">Email address</label>
+                    <input type="email" name="username" class="form-control" id="inputEmail" required>
+                    <div class="invalid-feedback">
+                        Please enter right e-mail.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword">Password</label>
+                    <input type="password" class="form-control" id="inputPassword" name="password" required>
+                    <div class="invalid-feedback">
+                        Please enter password.
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+            </form>
+            <a th:href="@{/newUser}">I'm not registered</a>
+        </div>
+    </div>
+    <!-- /.container-fluid -->
+
+    <!-- scripts-->
+    <div th:replace="~{dynamic/js}"></div>
+
+    <script>
+                (function() {
+                    'use strict';
+                    window.addEventListener('load', function() {
+                        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                        let forms = document.getElementsByClassName('needs-validation');
+                        // Loop over them and prevent submission
+                        let validation = Array.prototype.filter.call(forms, function (form) {
+                            form.addEventListener('submit', function (event) {
+                                if (form.checkValidity() === false) {
+                                    event.preventDefault();
+                                    event.stopPropagation();
+                                }
+                                form.classList.add('was-validated');
+                            }, false);
+                        });
+                    }, false);
+                })();
+            </script>
+
+</body>
+</html>

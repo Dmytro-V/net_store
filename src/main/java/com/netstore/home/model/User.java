@@ -19,10 +19,15 @@ public class User {
     @Column(name = "role")
     @Enumerated(value = EnumType.STRING)
     private Role role;
-    @Column(name = "address")
-    private String address;
     @Column(name = "status")
     @Enumerated(value = EnumType.STRING)
     private Status status;
-
+    @Column(name = "city")
+    private String city;
+    @Column(name = "address")
+    private String address;
+    @Column(name = "message")
+    private String message;
+    @Column(name = "avatar")
+    private String avatar;
 }

@@ -10,10 +10,6 @@
 <!-- Page Wrapper -->
 <div id="wrapper">
 
-    <!-- Sidebar -->
-    <div th:replace="~{dynamic/side-bar}"></div>
-    <!-- End of Sidebar -->
-
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
 
@@ -21,7 +17,7 @@
         <div id="content">
 
             <!-- Topbar -->
-            <div th:replace="~{dynamic/top-bar}"></div>
+            <div th:insert="~{dynamic/top-bar::topbar}"></div>
             <!-- End of Topbar -->
 
             <!-- Begin Page Content -->
@@ -73,6 +69,13 @@
                                             <label for="price" class="col-2 col-form-label">Price</label>
                                             <div class="col-10">
                                                 <input id = "price" class="form-control" name="price" type="text" th:value="${product.getPrice()}">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="quantity" class="col-2 col-form-label">Quantity</label>
+                                            <div class="col-10">
+                                                <input id = "quantity" class="form-control" name="quantity" type="text" th:value="${product.getQuantity()}">
                                             </div>
                                         </div>
                                     </div>

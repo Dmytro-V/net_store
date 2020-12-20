@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pl"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="~{dynamic/header}"></div>
+
+<body>
+<!-- Topbar -->
+<div th:insert="~{dynamic/top-bar::topbar}"></div>
+<!-- End of Topbar -->
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <div class="container" style="max-width: 600px" >
+        <h2>User created</h2>
+        <a th:href="@{/auth/login}">Login</a>
+
+    </div>
+</div>
+<!-- /.container-fluid -->
+
+
+<!-- scripts-->
+<div th:replace="~{dynamic/js}"></div>
+
+
+
+</body>
+</html>

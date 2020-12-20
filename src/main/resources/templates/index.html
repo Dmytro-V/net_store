@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="pl"
       xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <div th:replace="~{dynamic/header}"></div>
 
@@ -11,9 +12,9 @@
 <!-- Page Wrapper -->
 <div id="wrapper">
 
-    <!-- Sidebar -->
-    <div th:replace="~{dynamic/side-bar}"></div>
-    <!-- End of Sidebar -->
+<!--    &lt;!&ndash; Sidebar &ndash;&gt;-->
+<!--    <div th:replace="~{dynamic/side-bar}"></div>-->
+<!--    &lt;!&ndash; End of Sidebar &ndash;&gt;-->
 
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
@@ -22,7 +23,7 @@
         <div id="content">
 
             <!-- Topbar -->
-            <div th:replace="~{dynamic/top-bar}"></div>
+            <div th:insert="~{dynamic/top-bar::topbar}"></div>
             <!-- End of Topbar -->
 
             <!-- Begin Page Content -->

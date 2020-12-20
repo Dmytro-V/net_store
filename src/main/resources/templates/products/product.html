@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="pl"
       xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <div th:replace="~{dynamic/header}"></div>
 
@@ -10,10 +11,6 @@
 <!-- Page Wrapper -->
 <div id="wrapper">
 
-    <!-- Sidebar -->
-    <div th:replace="~{dynamic/side-bar}"></div>
-    <!-- End of Sidebar -->
-
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
 
@@ -21,7 +18,7 @@
         <div id="content">
 
             <!-- Topbar -->
-            <div th:replace="~{dynamic/top-bar}"></div>
+            <div th:insert="~{dynamic/top-bar::topbar}"></div>
             <!-- End of Topbar -->
 
             <!-- Begin Page Content -->
@@ -63,16 +60,29 @@
                                         <p id = "price" class="font-weight-bold text-primary text-uppercase mt-2" th:text="${product.getPrice()}"></p>
                                     </div>
                                 </div>
+
+                                <div class="form-group row">
+                                    <label for="quantity" class="col-2 col-form-label">Quantity</label>
+                                    <div class="col-10">
+                                        <p id = "quantity" class="font-weight-bold text-primary text-uppercase mt-2" th:text="${product.getQuantity()}"></p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <a type="button" class="btn btn-info" th:href="@{/editProduct(id=${product.getId()})}">
-                    Edit
+
+                <a role="button" class="btn btn-success" th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}" href="#">
+                    add to cart
                 </a>
-                <form th:action="@{/deleteProduct(id=${product.getId()})}" method="post">
-                    <button class="btn btn-danger" type="submit">Delete</button>
-                </form>
+
+                <a role="button" class="btn btn-info" th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" th:href="@{/editProduct/{id}(id=${product.getId()})}">
+                    edit
+                </a>
+
+                <a role="button" class="btn btn-danger" th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" th:href="@{/deleteProduct/{id}(id=${product.getId()})}">
+                    delete
+                </a>
 
             </div>
             <!-- /.container-fluid -->

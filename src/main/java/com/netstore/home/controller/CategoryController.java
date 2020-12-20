@@ -26,7 +26,6 @@ public class CategoryController {
 
 
     @GetMapping(value = {"/categories"})
-    @PreAuthorize("hasAuthority('read')")
     public String getCategories(Model model) {
         log.info("IN CategoryController getCategories");
         List<Category> categoriesList = categoryService.findAll();
@@ -36,7 +35,7 @@ public class CategoryController {
     }
 
     @GetMapping("/addCategory")
-    @PreAuthorize("hasAuthority('write')")
+    @PreAuthorize("hasRole('ADMIN')")
     public String addProduct(Model model) {
         log.info("IN CategoryController addCategory GET");
         List<Category> categoryList = categoryService.findAll();
@@ -45,7 +44,7 @@ public class CategoryController {
     }
 
     @PostMapping("/addNewCategory")
-    @PreAuthorize("hasAuthority('write')")
+    @PreAuthorize("hasRole('ADMIN')")
     public String addNewProduct(@ModelAttribute("category") final Category newCategory) {
         log.info("IN CategoryController POST addCategory with name: {}, parent: {}", newCategory.getName(), newCategory.getParent());
 

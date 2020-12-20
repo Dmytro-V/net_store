@@ -28,16 +28,14 @@ public class ProductController {
     }
 
     @GetMapping(value = {"/products"})
-    @PreAuthorize("hasAuthority('read')")
     public String getProducts(Model model) {
         List<Product> productsList = productService.findAll();
         model.addAttribute("products", productsList);
         return "products/products";
     }
 
-    @GetMapping("/viewProduct")
-    @PreAuthorize("hasAuthority('read')")
-    public String getProductById(@RequestParam Long id, Model model) {
+    @GetMapping("/viewProduct/{id}")
+    public String getProductById(@PathVariable("id") Long id, Model model) {
         Optional<Product> find = productService.findById(id);
         if (find.isPresent()) {
             model.addAttribute("product", find.get());
@@ -46,9 +44,9 @@ public class ProductController {
         return "products/product";
     }
 
-    @GetMapping("/editProduct")
-    @PreAuthorize("hasAuthority('write')")
-    public String editProductById(@RequestParam Long id, Model model) {
+    @GetMapping("/editProduct/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public String editProductById(@PathVariable("id") Long id, Model model) {
         log.info("in get update id: " + id);
 
         List<Category> categoryList = categoryService.findAll();
@@ -63,16 +61,16 @@ public class ProductController {
     }
 
     @PostMapping("/updateProduct")
-    @PreAuthorize("hasAuthority('write')")
+    @PreAuthorize("hasRole('ADMIN')")
     public String updateProduct(@ModelAttribute("product") final Product newProduct, @RequestParam Long id) {
         log.info("in post update id: " + id);
         newProduct.setId(id);
         Product savedProduct = productService.saveProduct(newProduct);
-        return "redirect:/viewProduct?id=" + savedProduct.getId();
+        return "redirect:/viewProduct/" + savedProduct.getId();
     }
 
     @GetMapping("/addProduct")
-    @PreAuthorize("hasAuthority('write')")
+    @PreAuthorize("hasRole('ADMIN')")
     public String addProduct(Model model) {
         List<Category> categoryList = categoryService.findAll();
         model.addAttribute("categories", categoryList);
@@ -80,15 +78,15 @@ public class ProductController {
     }
 
     @PostMapping("/addNewProduct")
-    @PreAuthorize("hasAuthority('write')")
+    @PreAuthorize("hasRole('ADMIN')")
     public String addNewProduct(@ModelAttribute("product") final Product newProduct) {
         Product addedProduct = productService.saveProduct(newProduct);
-        return "redirect:/viewProduct?id=" + addedProduct.getId();
+        return "redirect:/viewProduct/" + addedProduct.getId();
     }
 
-    @PostMapping("/deleteProduct")
-    @PreAuthorize("hasAuthority('write')")
-    public String deleteProduct(@RequestParam Long id) {
+    @GetMapping("/deleteProduct/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public String deleteProduct(@PathVariable("id") Long id) {
         productService.deleteProduct(id);
         return "redirect:/products";
     }
