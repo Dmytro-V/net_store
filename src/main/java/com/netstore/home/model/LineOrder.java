@@ -3,27 +3,26 @@ package com.netstore.home.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
-import java.util.List;
+import java.math.BigDecimal;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "categories")
-public class Category {
+@Table(name = "line_order")
+public class LineOrder {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name="id")
     private Long id;
-    @Column(name = "name")
-    private String name;
     @OneToOne
-    private Category parent;
-    @OneToMany
-    private List<Category> children;
+    private Product product;
+    @Column(name = "quantity")
+    private int quantity;
+    @Column(name = "price")
+    private BigDecimal price;
 
 }
