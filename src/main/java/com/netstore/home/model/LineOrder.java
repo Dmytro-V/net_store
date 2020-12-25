@@ -18,10 +18,13 @@ public class LineOrder {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private Long id;
+
     @OneToOne
     private Product product;
+
     @Column(name = "quantity")
     private int quantity;
+
     @Column(name = "price")
     private BigDecimal price;
 
