@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 
 @Entity
 @Data
@@ -25,7 +24,6 @@ public class LineOrder {
     @Column(name = "quantity")
     private int quantity;
 
-    @Column(name = "price")
-    private BigDecimal price;
+
 
 }

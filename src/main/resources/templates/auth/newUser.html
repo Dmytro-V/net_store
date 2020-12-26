@@ -14,6 +14,7 @@
     <div class="container" style="max-width: 600px">
         <form class="needs-validation" novalidate method="post" th:action="@{/addNewUser}" th:object="${newUser}">
                 <h2>New user</h2>
+            <p th:if="${addUserError}" class="text-danger">user with this Email is already exist</p>
                 <div class="form-group">
                     <label for="inputEmail">Email address</label>
                     <input type="email" name="email" class="form-control" id="inputEmail" required>
@@ -30,19 +31,19 @@
                 </div>
                 <div class="form-group">
                     <label for="inputCity">City</label>
-                    <input type="password" class="form-control" id="inputCity" name="city">
+                    <input type="text" class="form-control" id="inputCity" name="city">
                 </div>
                 <div class="form-group">
                     <label for="inputAddress">Address</label>
-                    <input type="password" class="form-control" id="inputAddress" name="address">
+                    <input type="text" class="form-control" id="inputAddress" name="address">
                 </div>
                 <div class="form-group">
                     <label for="inputMessage">Message</label>
-                    <input type="password" class="form-control" id="inputMessage" name="message">
+                    <input type="text" class="form-control" id="inputMessage" name="message">
                 </div>
                 <div class="form-group">
                     <label for="inputAvatar">Avatar</label>
-                    <input type="password" class="form-control" id="inputAvatar" name="avatar">
+                    <input type="text" class="form-control" id="inputAvatar" name="avatar">
                 </div>
                 <div class="form-group">
                     <div class="form-check">

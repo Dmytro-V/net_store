@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pl"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="~{dynamic/header}"></div>
+
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <div th:insert="~{dynamic/top-bar::topbar}"></div>
+            <!-- End of Topbar -->
+
+            <!-- Begin Page Content -->
+            <div class="container">
+                <h2>Order</h2>
+                <label for="creation_data">created:</label>
+                <div id="creation_data" scope="col" th:text="${order.getCreationDate()}">date</div>
+                <label for="status">status:</label>
+                <div id="status" scope="col" th:text="${order.getOrderStatus().name()}">status</div>
+                <label for="username">Username:</label>
+                <div id="username" scope="col" th:text="${order.getUserName()}">username</div>
+                <table class="table table-striped" >
+                    <thead>
+                    <tr>
+                        <th scope="col">product</th>
+                        <th scope="col">price</th>
+                        <th scope="col">quantity</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="lineOrder : ${order.getLinesForOrder()}">
+                        <td th:text="${lineOrder.getProduct().getTitle()}"></td>
+                        <td th:text="${lineOrder.getProduct().getPrice()}"></td>
+                        <td th:text="${lineOrder.getQuantity()}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <a role="button" class="btn btn-success" href="#">
+                    print
+                </a>
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <div th:replace="~{dynamic/footer}"></div>
+        <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- scripts-->
+<div th:replace="~{dynamic/js}"></div>
+
+</body>
+
+</html>

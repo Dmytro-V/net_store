@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pl"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<div th:replace="~{dynamic/header}"></div>
+
+<body>
+<!-- Topbar -->
+<div th:insert="~{dynamic/top-bar::topbar}"></div>
+<!-- End of Topbar -->
+
+<!-- Begin Page Content -->
+<div class="container" style="max-width: 600px">
+    <form class="needs-validation" novalidate method="post" action="#" th:object="${user}">
+        <h2>Profile</h2>
+        <div class="form-group">
+            <label for="inputEmail">Email address</label>
+            <input type="email" name="email" class="form-control" id="inputEmail" readonly th:value="${user.getEmail()}">
+
+        </div>
+        <div class="form-group">
+            <label for="inputCity">City</label>
+            <input type="text" class="form-control" id="inputCity" name="city" th:value="${user.getCity()}">
+        </div>
+        <div class="form-group">
+            <label for="inputAddress">Address</label>
+            <input type="text" class="form-control" id="inputAddress" name="address" th:value="${user.getAddress()}">
+        </div>
+        <div class="form-group">
+            <label for="inputMessage">Message</label>
+            <input type="text" class="form-control" id="inputMessage" name="message" th:value="${user.getMessage()}">
+        </div>
+        <div class="form-group">
+            <label for="inputAvatar">Avatar</label>
+            <input type="text" class="form-control" id="inputAvatar" name="avatar" th:value="${user.getAvatar()}">
+        </div>
+
+<!--        //TODO: do select for status and role-->
+        <!--/* for ADMIN  */-->
+        <th:block th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+        <div class="form-group">
+            <label for="role">role</label>
+            <input type="text" class="form-control" id="role" name="avatar" th:value="${user.getRole().name()}">
+        </div>
+        <div class="form-group">
+            <label for="status">status</label>
+            <input type="text" class="form-control" id="status" name="avatar" th:value="${user.getStatus().name()}">
+        </div>
+        </th:block>
+        <!--/* end for ADMIN */-->
+
+        <button type="submit" class="btn btn-primary btn-block">Save</button>
+    </form>
+</div>
+<!-- /.container-fluid -->
+
+
+<!-- scripts-->
+<div th:replace="~{dynamic/js}"></div>
+
+<script>
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            let forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            let validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
+
+</body>
+</html>

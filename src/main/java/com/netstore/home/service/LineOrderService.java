@@ -22,7 +22,7 @@ public class LineOrderService {
         return lineOrderRepository.findAll();
     }
 
-    public LineOrder saveProduct(LineOrder lineOrder) {
+    public LineOrder save(LineOrder lineOrder) {
         return lineOrderRepository.save(lineOrder);
     }
 }

@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -19,12 +20,11 @@ public class Order {
     @Column(name = "id")
     private Long id;
 
-
-    @OneToOne
-    private User user;
+    @Column(name = "user_name")
+    private String userName;
 
     @OneToMany
-    private List<LineOrder> linesForOrder;
+    private List<LineOrder> linesForOrder = new ArrayList<>();
 
     @Column(name = "destination")
     private String destination;

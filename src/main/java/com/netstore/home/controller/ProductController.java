@@ -65,7 +65,7 @@ public class ProductController {
     public String updateProduct(@ModelAttribute("product") final Product newProduct, @RequestParam Long id) {
         log.info("in post update id: " + id);
         newProduct.setId(id);
-        Product savedProduct = productService.saveProduct(newProduct);
+        Product savedProduct = productService.save(newProduct);
         return "redirect:/viewProduct/" + savedProduct.getId();
     }
 
@@ -80,14 +80,14 @@ public class ProductController {
     @PostMapping("/addNewProduct")
     @PreAuthorize("hasRole('ADMIN')")
     public String addNewProduct(@ModelAttribute("product") final Product newProduct) {
-        Product addedProduct = productService.saveProduct(newProduct);
+        Product addedProduct = productService.save(newProduct);
         return "redirect:/viewProduct/" + addedProduct.getId();
     }
 
     @GetMapping("/deleteProduct/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public String deleteProduct(@PathVariable("id") Long id) {
-        productService.deleteProduct(id);
+        productService.deleteById(id);
         return "redirect:/products";
     }
 }

@@ -31,18 +31,5 @@ public class MainController {
         return "auth/login";
     }
 
-    @PreAuthorize("hasRole('USER')")
-    @GetMapping("/cart")
-    public String getCart() {
-        return "cart";
-    }
-
-    @PreAuthorize("hasRole('USER')")
-    @GetMapping("/cart/addProduct/{id}")
-    public String addProductToCart(@PathVariable("id") Long id, @RequestParam ("add-quantity") int quantity) {
-        System.out.println("id: " + id + " quantity: " + quantity);
-
-        return "cart";
-    }
 
 }
