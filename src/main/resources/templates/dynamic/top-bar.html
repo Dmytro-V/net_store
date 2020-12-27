@@ -3,11 +3,6 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<!--
-    for adding use
-    <div th:insert="~{dynamic/top-bar::topbar}"></div>
--->
-
 <body>
 
 <!-- Topbar -->
@@ -58,7 +53,7 @@
             </th:block>
             <!--/* end for Admin */-->
 
-            <!--for User -->
+            <!--/* for User */-->
             <li class="nav-item active" th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
                 <a class="nav-link" th:href="@{/cart}" >Cart</a>
             </li>
@@ -66,7 +61,7 @@
             <li class="nav-item active" th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
                 <a class="nav-link" th:href="@{/getUserOrders}" >Orders</a>
             </li>
-            <!-- end for User -->
+            <!--/* end for User */-->
 
 
             <li class="nav-item active" sec:authorize="not isAuthenticated()">

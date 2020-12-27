@@ -22,43 +22,27 @@
 
             <!-- Begin Page Content -->
             <div class="container">
-
-
-                <!-- Content Row -->
-                <div class="row">
-
-                    <!-- Earnings (Monthly) Card Example -->
-                    <div class="col-xl-3 col-md-6 mb-4" th:each="product : ${products}" >
-                        <a class="card border-left-primary shadow h-100 py-2" th:href="@{/viewProduct/{id}(id=${product.getId()})}">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="mb-0 font-weight-bold text-gray-800">
-                                            Category: <p th:text="${product.getCategory().getName()}"></p>
-                                        </div>
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                            <p th:text="${product.getTitle()}"></p>
-                                            <p th:text="${product.getDescription()}"></p>
-                                        </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                            Price: <p th:text="${product.getPrice()}"></p>
-                                        </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                            Quantity: <p th:text="${product.getQuantity()}"></p>
-                                        </div>
+                <div class="row row-cols-1 row-cols-md-3">
+                    <div class="col mb-4" th:each="product : ${products}">
+                        <a class="card shadow bg-light mb-3 h-100"  th:href="@{/viewProduct/{id}(id=${product.getId()})}">
+                            <div class="row no-gutters" >
+                                <div class="col-md-4 align-self-center" >
+                                    <img class="card-img img-fluid" th:src="${product.getIcon()}" alt="image">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title" th:text="${product.getTitle()}">title</h5>
+                                        <p class="card-text" th:text="${product.getDescription()}">description</p>
                                     </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-users fa-2x text-gray-300"></i>
+                                    <div class="card-body">
+                                        <p class="card-text" th:text="${product.getPrice()} + ' $'">price</p>
+                                        <p class="card-text" th:text="${product.getQuantity()} + ' items'">quantity</p>
                                     </div>
-                                    <!-- Button to Open the Modal -->
-
                                 </div>
                             </div>
                         </a>
                     </div>
                 </div>
-
-
             </div>
             <!-- /.container-fluid -->
 

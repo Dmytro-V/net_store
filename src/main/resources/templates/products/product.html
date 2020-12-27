@@ -22,51 +22,50 @@
             <!-- End of Topbar -->
 
             <!-- Begin Page Content -->
-            <div class="container-fluid">
+            <div class="container">
 
                 <!-- Content Row -->
                 <div class="row">
                     <div class="col-xl-12 col-md-12 mb-12">
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <div class="form-group row">
-                                    <label for="category" class="col-2 col-form-label">Category:</label>
-                                    <div class="col-10">
-                                        <p class="font-weight-bold text-primary text-uppercase mt-2" id="category" th:text="${product.getCategory().getName()}" ></p>
-                                    </div>
+                        <div class="card shadow">
+                            <div class="row" >
+                                <div class="col-md-4 align-self-center" >
+                                    <img class="card-img img-fluid" th:src="${product.getIcon()}" alt="image">
                                 </div>
-                                <div class="form-group row">
-                                    <label for="title" class="col-2 col-form-label">Title</label>
-                                    <div class="col-10">
-                                        <p class="font-weight-bold text-primary text-uppercase mt-2" id="title" th:text="${product.getTitle()}" ></p>
+                                <div class="col-md-8">
+                                <div class="card-header py-3">
+                                    <div class="form-group row">
+                                        <label for="category" class="col-2 col-form-label">Category:</label>
+                                        <div class="col-10">
+                                            <p class="font-weight-bold text-primary text-uppercase mt-2" id="category" th:text="${product.getCategory().getName()}" ></p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="description" class="col-2 col-form-label">Description:</label>
-                                    <div class="col-10">
+                                    <div class="form-group row">
+                                        <label for="title" class="col-2 col-form-label">Title</label>
+                                        <div class="col-10">
+                                            <p class="font-weight-bold text-primary text-uppercase mt-2" id="title" th:text="${product.getTitle()}" ></p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="description" class="col-2 col-form-label">Description:</label>
+                                        <div class="col-10">
                                             <p class="font-weight-bold text-primary text-uppercase mt-2" id="description" th:text="${product.getDescription()}"></p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="price" class="col-2 col-form-label">Price</label>
+                                        <div class="col-10">
+                                            <p id = "price" class="font-weight-bold text-primary text-uppercase mt-2" th:text="${product.getPrice()}"></p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="quantity" class="col-2 col-form-label">Quantity</label>
+                                        <div class="col-10">
+                                            <p id = "quantity" class="font-weight-bold text-primary text-uppercase mt-2" th:text="${product.getQuantity()}"></p>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label for="icon" class="col-2 col-form-label">Icon</label>
-                                    <div class="col-10">
-                                        <p id="icon" class="font-weight-bold text-primary text-uppercase mt-2" th:text="${product.getIcon()}"></p>
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="price" class="col-2 col-form-label">Price</label>
-                                    <div class="col-10">
-                                        <p id = "price" class="font-weight-bold text-primary text-uppercase mt-2" th:text="${product.getPrice()}"></p>
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="quantity" class="col-2 col-form-label">Quantity</label>
-                                    <div class="col-10">
-                                        <p id = "quantity" class="font-weight-bold text-primary text-uppercase mt-2" th:text="${product.getQuantity()}"></p>
-                                    </div>
-                                </div>
+                            </div>
                             </div>
                         </div>
                     </div>
