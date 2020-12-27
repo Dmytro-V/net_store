@@ -10,10 +10,6 @@
 <!-- Page Wrapper -->
 <div id="wrapper">
 
-<!--    &lt;!&ndash; Sidebar &ndash;&gt;-->
-<!--    <div th:replace="~{dynamic/side-bar}"></div>-->
-<!--    &lt;!&ndash; End of Sidebar &ndash;&gt;-->
-
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
 
@@ -29,7 +25,6 @@
 
                 <!--                begin Tree-->
                 <div id="treeCategories">
-
                     <ul>
                         <li th:each="category : ${categories}" th:if="${category.getParent() == null}" >
                             <ul th:fragment="getTreeChildren (category)" >

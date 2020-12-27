@@ -1,7 +1,6 @@
 package com.netstore.home.controller;
 
-import com.netstore.home.model.Order;
-import com.netstore.home.model.User;
+import com.netstore.home.model.*;
 import com.netstore.home.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,7 +65,9 @@ public class UserController {
         log.info("in getUser id: " + id);
         User user = userService.findById(id).get();
         model.addAttribute("user", user);
-        return "auth/user";
+        model.addAttribute("roles", Role.values());
+        model.addAttribute("statuses", Status.values());
+        return "auth/profile";
     }
 
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
@@ -75,8 +76,30 @@ public class UserController {
         log.info("in getProfile");
         User user = userService.findByName(principal.getName()).get();
         model.addAttribute("user", user);
+        model.addAttribute("roles", Role.values());
+        model.addAttribute("statuses", Status.values());
         return "auth/profile";
+    }
 
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    @PostMapping(value = {"/updateUser"})
+    public String updateUser(@ModelAttribute("user") final User updateUser, Principal principal) {
+        log.info("in updateUser");
+        User user = userService.findByName(updateUser.getEmail()).get();
+        user.setCity(updateUser.getCity());
+        user.setAddress(updateUser.getAddress());
+        user.setMessage(updateUser.getMessage());
+        user.setAvatar(updateUser.getAvatar());
+
+        if (userService.findByName(principal.getName()).get().getRole().equals(Role.ADMIN)) {
+            user.setRole(updateUser.getRole());
+            user.setStatus(updateUser.getStatus());
+            userService.save(user);
+            return "redirect:/getAllUsers";
+        }
+
+        userService.save(user);
+        return "redirect:/";
     }
 
 }
