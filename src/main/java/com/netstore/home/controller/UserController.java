@@ -4,6 +4,10 @@ import com.netstore.home.model.*;
 import com.netstore.home.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Controller
@@ -53,9 +58,17 @@ public class UserController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping(value = {"/getAllUsers"})
-    public String getUsers(Model model) {
-        List<User> users = userService.findAll();
-        model.addAttribute("users", users);
+    public String getUsers(Model model, @PageableDefault(size=5, sort="email") Pageable pageable) {
+        Page<User> pageUsers = userService.findAll(pageable);
+        model.addAttribute("page", pageUsers);
+
+        List<Sort.Order> sortOrders = pageUsers.getSort().stream().collect(Collectors.toList());
+        if (sortOrders.size() > 0) {
+            Sort.Order order = sortOrders.get(0);
+            model.addAttribute("sortProperty", order.getProperty());
+            model.addAttribute("sortDesc", order.getDirection() == Sort.Direction.DESC);
+        }
+
         return "auth/users";
     }
 

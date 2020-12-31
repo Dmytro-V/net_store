@@ -25,21 +25,21 @@
                 <h2>Orders</h2>
                 <table class="table table-hover">
                     <thead>
-                    <tr>
-                        <th scope="col">creation data</th>
-                        <th scope="col">user name</th>
-                        <th scope="col">status</th>
-                        <th></th>
-                    </tr>
+                        <tr>
+                            <th scope="col">creation data</th>
+                            <th scope="col">user name</th>
+                            <th scope="col">status</th>
+                            <th></th>
+                        </tr>
                     </thead>
 
                     <tbody>
-                    <tr th:each="order : ${orders}">
-                        <td th:text="${order.getCreationDate()}"></td>
-                        <td th:text="${order.getUserName()}"></td>
-                        <td th:text="${order.getOrderStatus().name()}"></td>
-                        <td><a class="btn btn-success" th:href="@{/getOrder/{id}(id=${order.getId()})}">details</a></td>
-                    </tr>
+                        <tr th:each="order : ${orders}">
+                            <td th:text="${#dates.format( order.getCreationDate() , 'yyyy-MM-dd HH:mm:ss')}"></td>
+                            <td th:text="${order.getUserName()}"></td>
+                            <td th:text="${order.getOrderStatus().name()}"></td>
+                            <td><a class="btn btn-success" th:href="@{/getOrder/{id}(id=${order.getId()})}">details</a></td>
+                        </tr>
                     </tbody>
 
                 </table>

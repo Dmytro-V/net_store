@@ -5,6 +5,9 @@ import com.netstore.home.model.Status;
 import com.netstore.home.model.User;
 import com.netstore.home.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -36,8 +39,8 @@ public class UserService {
         return true;
     }
 
-    public List<User> findAll() {
-        return userRepository.findAll();
+    public Page<User> findAll(Pageable pageable) {
+        return userRepository.findAll(pageable);
     }
 
     public Optional<User> findById(Long id) {
@@ -51,4 +54,6 @@ public class UserService {
     public void save(User updateUser) {
         userRepository.save(updateUser);
     }
+
+
 }
