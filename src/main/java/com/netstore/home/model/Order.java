@@ -30,6 +30,7 @@ public class Order {
     private String destination;
 
     @Column(name = "order_status")
+    @Enumerated(value=EnumType.STRING)
     private OrderStatus orderStatus;
 
     @Column(name = "creation_date")

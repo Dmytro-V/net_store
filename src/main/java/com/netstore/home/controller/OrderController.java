@@ -100,12 +100,12 @@ public class OrderController {
 
     @PreAuthorize("hasRole('USER')")
     @GetMapping(value = {"/getUserOrders"})
-    public String getUserOrders(Model model, Principal principal) {
+    public String getUserOrders(Model model, Principal principal, @PageableDefault(size = 5, sort = "creationDate", direction = Sort.Direction.DESC) Pageable pageable) {
         log.info("in getUserOrders");
 
-        List<Order> orders = orderService.findByUserName(principal.getName());
+        Page<Order> orders = orderService.findByUserName(principal.getName(), pageable);
 
-        model.addAttribute("orders", orders);
+        model.addAttribute("page", orders);
         return "orders/userOrders";
     }
 
@@ -149,6 +149,18 @@ public class OrderController {
         Order order = orderService.findById(id).get();
 
         model.addAttribute("order", order);
+        model.addAttribute("orderFinished", OrderStatus.FINISHED);
+
         return "orders/order";
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping(value = {"/order/{id}/setFinished"})
+    public String setOrderFinished(@PathVariable("id") Long id) {
+        log.info("in setOrderFinished id: " + id);
+
+        orderService.setOrderFinished(id);
+
+        return "redirect:/getOrder/" + id;
     }
 }

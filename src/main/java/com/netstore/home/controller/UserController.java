@@ -85,7 +85,7 @@ public class UserController {
 
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @GetMapping(value = {"/getProfile"})
-    public String getOrder(Model model, Principal principal) {
+    public String getProfile(Model model, Principal principal) {
         log.info("in getProfile");
         User user = userService.findByName(principal.getName()).get();
         model.addAttribute("user", user);

@@ -1,6 +1,7 @@
 package com.netstore.home.service;
 
 import com.netstore.home.model.Order;
+import com.netstore.home.model.OrderStatus;
 import com.netstore.home.repository.OrderRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,11 +32,17 @@ public class OrderService {
         return orderRepository.save(order);
     }
 
-    public List<Order> findByUserName(String userName) {
-        return orderRepository.findByUserName(userName);
+    public Page<Order> findByUserName(String userName, Pageable pageable) {
+        return orderRepository.findByUserName(userName, pageable);
     }
 
     public Optional<Order> findById(Long id) {
         return orderRepository.findById(id);
+    }
+
+    public void setOrderFinished(Long id) {
+        Order order = orderRepository.getOne(id);
+        order.setOrderStatus(OrderStatus.FINISHED);
+        orderRepository.save(order);
     }
 }

@@ -23,12 +23,19 @@
             <!-- Begin Page Content -->
             <div class="container">
                 <h2>Order</h2>
-                <label for="creation_data">created:</label>
-                <div id="creation_data" scope="col" th:text="${order.getCreationDate()}">date</div>
-                <label for="status">status:</label>
-                <div id="status" scope="col" th:text="${order.getOrderStatus().name()}">status</div>
-                <label for="username">Username:</label>
-                <div id="username" scope="col" th:text="${order.getUserName()}">username</div>
+                <div class="row">
+                    <label class="col-sm-2" for="username">Username:</label>
+                    <div class="col-sm-10" id="username" scope="col" th:text="${order.getUserName()}">username</div>
+                </div>
+                <div class="row">
+                    <label class="col-sm-2" for="creation_data">created:</label>
+                    <div class="col-sm-10" id="creation_data" scope="col" th:text="${#dates.format( order.getCreationDate() , 'yyyy-MM-dd HH:mm:ss')}">date</div>
+                </div>
+                <div class="row">
+                    <label class="col-sm-2" for="status">status:</label>
+                    <div class="col-sm-10" id="status" scope="col" th:text="${order.getOrderStatus().name()}">status</div>
+                </div>
+
                 <table class="table table-striped" >
                     <thead>
                     <tr>
@@ -51,7 +58,6 @@
                 </a>
 
             </div>
-            <!-- /.container-fluid -->
 
         </div>
         <!-- End of Main Content -->
