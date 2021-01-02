@@ -4,6 +4,8 @@ import com.netstore.home.model.Order;
 import com.netstore.home.repository.OrderRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,8 +22,8 @@ public class OrderService {
         this.orderRepository = orderRepository;
     }
 
-    public List<Order> findAll() {
-        return orderRepository.findAll();
+    public Page<Order> findAll(Pageable pageable) {
+        return orderRepository.findAll(pageable);
     }
 
     public Order save(Order order) {

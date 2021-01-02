@@ -17,7 +17,7 @@
         <div id="content">
 
             <!-- Topbar -->
-            <div th:insert="~{dynamic/top-bar::topbar}"></div>
+            <div th:replace="~{dynamic/top-bar::topbar}"></div>
             <!-- End of Topbar -->
 
             <!-- Begin Page Content -->
@@ -85,17 +85,12 @@
 
                         <input class="btn btn-success pull-left" type="submit" value="Save" id="saveButton"></input>
 
-
                     </div>
                     <!-- /.container-fluid -->
                 </form>
 
-
             </div>
             <!-- /.container-fluid -->
-
-
-
 
         </div>
         <!-- End of Main Content -->
@@ -111,7 +106,7 @@
 <!-- End of Page Wrapper -->
 
 <!-- scripts-->
-<div th:replace="~{dynamic/js}"></div>
+<div th:replace="~{dynamic/js::scripts}"></div>
 
 </body>
 

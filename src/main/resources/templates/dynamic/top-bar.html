@@ -6,9 +6,11 @@
 <body>
 
 <!-- Topbar -->
+<!--/* for adding use <div th:replace="~{dynamic/top-bar::topbar}"></div>   */-->
 <nav th:fragment="topbar"
      class="navbar navbar-expand-lg navbar-dark mb-3"
      th:style="${#authorization.expression('hasRole(''ROLE_ADMIN'')')} ? 'background-color:#858796' : 'background-color:#1d2124' ">
+
 
     <a class="navbar-brand" th:href="@{/}">netSTORE</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">

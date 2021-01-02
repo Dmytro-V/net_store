@@ -10,10 +10,6 @@
 <!-- Page Wrapper -->
 <div id="wrapper">
 
-<!--    &lt;!&ndash; Sidebar &ndash;&gt;-->
-<!--    <div th:replace="~{dynamic/side-bar}"></div>-->
-<!--    &lt;!&ndash; End of Sidebar &ndash;&gt;-->
-
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
 
@@ -21,12 +17,11 @@
         <div id="content">
 
             <!-- Topbar -->
-            <div th:insert="~{dynamic/top-bar::topbar}"></div>
+            <div th:replace="~{dynamic/top-bar::topbar}"></div>
             <!-- End of Topbar -->
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
-
 
                 <form name="send" method="post" th:action="@{/addNewCategory}" th:object="${category}"        >
                     <!-- Begin Page Content -->
@@ -95,7 +90,7 @@
 <!-- End of Page Wrapper -->
 
 <!-- scripts-->
-<div th:replace="~{dynamic/js}"></div>
+<div th:replace="~{dynamic/js::scripts}"></div>
 
 </body>
 

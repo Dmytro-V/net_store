@@ -6,6 +6,10 @@ import com.netstore.home.service.OrderService;
 import com.netstore.home.service.ProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.security.Principal;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Controller
@@ -120,12 +125,19 @@ public class OrderController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping(value = {"/getAllOrders"})
-    public String getAllOrders(Model model) {
+    public String getAllOrders(Model model, @PageableDefault(size=5, sort="creationDate", direction = Sort.Direction.DESC) Pageable pageable) {
         log.info("in getAllOrders");
 
-        List<Order> orders = orderService.findAll();
+        Page<Order> pageOrders = orderService.findAll(pageable);
+        model.addAttribute("page", pageOrders);
 
-        model.addAttribute("orders", orders);
+        List<Sort.Order> sortOrders = pageOrders.getSort().stream().collect(Collectors.toList());
+        if (sortOrders.size() > 0) {
+            Sort.Order sortOrder = sortOrders.get(0);
+            model.addAttribute("sortProperty", sortOrder.getProperty());
+            model.addAttribute("sortDesc", sortOrder.getDirection() == Sort.Direction.DESC);
+        }
+
         return "orders/allOrders";
     }
 

@@ -18,7 +18,7 @@
         <div id="content">
 
             <!-- Topbar -->
-            <div th:insert="~{dynamic/top-bar::topbar}"></div>
+            <div th:replace="~{dynamic/top-bar::topbar}"></div>
             <!-- End of Topbar -->
 
             <!-- Begin Page Content -->
@@ -83,41 +83,9 @@
 <!-- End of Page Wrapper -->
 
 <!-- scripts-->
-<div th:replace="~{dynamic/js}"></div>
+<div th:replace="~{dynamic/js::scripts}"></div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script th:inline="javascript">
-    //thymeleaf to javascript variables
-    /*<![CDATA[*/
-    var sortProperty = /*[[${sortProperty}]]*/ null;
-    var sortDesc = /*[[${sortDesc}]]*/ null;
-    var currentPage = /*[[${page.number}]]*/ 0;
-    var pageSize =/*[[${page.size}]]*/ 0;
-    /*]]>*/
-
-    $(document).ready(function(){
-        //show up/down arrows
-        $("table#emp-table thead th").each(function(){
-            var head = $(this);
-            if(head.attr('data-sort-prop')==sortProperty){
-                head.append(sortDesc?'▾':'▴');
-            }
-        });
-
-        //set click action, reload page on clicking with all query params
-        $("table#emp-table thead th").click(function() {
-            var headerSortPropName = $(this).attr("data-sort-prop");
-            if(headerSortPropName==sortProperty){
-                window.location.href = window.location.pathname+
-                    '?page='+currentPage+'&size='+pageSize+'&sort='+ headerSortPropName+','+
-                    (sortDesc?'asc':'desc');
-            }else{
-                window.location.href = window.location.pathname+
-                    '?page='+currentPage+'&size='+pageSize+'&sort='+ headerSortPropName+',asc';
-            }
-        });
-    });
-</script>
+<div th:replace="~{dynamic/js::js_pagination}"></div>
 
 </body>
 

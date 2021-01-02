@@ -7,7 +7,7 @@
 
 <body>
 <!-- Topbar -->
-<div th:insert="~{dynamic/top-bar::topbar}"></div>
+<div th:replace="~{dynamic/top-bar::topbar}"></div>
 <!-- End of Topbar -->
 
 <!-- Begin Page Content -->
@@ -23,7 +23,7 @@
 
 
 <!-- scripts-->
-<div th:replace="~{dynamic/js}"></div>
+<div th:replace="~{dynamic/js::scripts}"></div>
 
 </body>
 </html>
