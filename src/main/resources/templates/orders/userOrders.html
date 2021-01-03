@@ -25,19 +25,19 @@
                 <h2>Orders</h2>
                 <table class="table table-hover">
                     <thead>
-                    <tr>
-                        <th scope="col">creation data</th>
-                        <th scope="col">status</th>
-                        <th></th>
-                    </tr>
+                        <tr>
+                            <th scope="col">creation data</th>
+                            <th scope="col">status</th>
+                            <th></th>
+                        </tr>
                     </thead>
 
                     <tbody>
-                    <tr th:each="order : ${page.content}">
-                        <td th:text="${#dates.format( order.getCreationDate() , 'yyyy-MM-dd HH:mm:ss')}"></td>
-                        <td th:text="${order.getOrderStatus().name()}"></td>
-                        <td><a class="btn btn-success" th:href="@{/getUserOrder/{id}(id=${order.getId()})}">details</a></td>
-                    </tr>
+                        <tr th:each="order : ${page.content}">
+                            <td th:text="${#dates.format( order.getCreationDate() , 'yyyy-MM-dd HH:mm:ss')}"></td>
+                            <td th:text="${order.getOrderStatus().name()}"></td>
+                            <td><a class="btn btn-success" th:href="@{/getUserOrder/{id}(id=${order.getId()})}">details</a></td>
+                        </tr>
                     </tbody>
                 </table>
                 <nav aria-label="Page navigation">
@@ -52,7 +52,6 @@
                             <li class="page-item" th:unless="${page.number == i}">
                                 <a class="page-link" th:href="@{/getUserOrders(page=${i},size=${page.size})}">[[${i}+1]]</a>
                             </li>
-
                         </th:block>
                         <li class="page-item" th:if="${page.hasNext()}">
                             <a class="page-link" th:href="@{/getUserOrders(page=${page.number}+1, size=${page.size})}">&raquo;</a>
@@ -67,7 +66,7 @@
         <!-- End of Main Content -->
 
         <!-- Footer -->
-        <div th:replace="~{dynamic/footer}"></div>
+        <div th:replace="~{dynamic/footer::footer}"></div>
         <!-- End of Footer -->
 
     </div>

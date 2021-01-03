@@ -22,35 +22,52 @@
 
             <!-- Begin Page Content -->
             <div class="container">
-                <div class="row row-cols-1 row-cols-md-3">
-                    <div class="col mb-4" th:each="product : ${products}">
-                        <a class="card shadow bg-light mb-3 h-100"  th:href="@{/viewProduct/{id}(id=${product.getId()})}">
-                            <div class="row no-gutters" >
-                                <div class="col-md-4 align-self-center" >
-                                    <img class="card-img img-fluid" th:src="${product.getIcon()}" alt="image">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h5 class="card-title" th:text="${product.getTitle()}">title</h5>
-                                        <p class="card-text" th:text="${product.getDescription()}">description</p>
+                    <div class="row row-cols-md-3" >
+                        <div class="col mb-4"  th:each="product : ${page.content}">
+                            <a class="card shadow bg-light mb-3 h-100"  th:href="@{/viewProduct/{id}(id=${product.getId()})}">
+                                <div class="row no-gutters" >
+                                    <div class="col-md-4 align-self-center" >
+                                        <img class="card-img img-fluid" th:src="${product.getIcon()}" alt="image">
                                     </div>
-                                    <div class="card-body">
-                                        <p class="card-text" th:text="${product.getPrice()} + ' $'">price</p>
-                                        <p class="card-text" th:text="${product.getQuantity()} + ' items'">quantity</p>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h5 class="card-title" th:text="${product.getTitle()}">title</h5>
+                                            <p class="card-text" th:text="${product.getDescription()}">description</p>
+                                        </div>
+                                        <div class="card-body">
+                                            <p class="card-text" th:text="${product.getPrice()} + ' $'">price</p>
+                                            <p class="card-text" th:text="${product.getQuantity()} + ' items'">quantity</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </a>
+                            </a>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <!-- /.container-fluid -->
+                <nav aria-label="Page navigation">
+                    <ul class="pagination" th:with="sortParam = ${sortProperty + ',' + (sortDesc?'desc':'asc')}">
+                        <li class="page-item" th:if="${page.hasPrevious()}">
+                            <a class="page-link" th:href="@{/products(page=${page.number}-1,size=${page.size},sort=${sortParam})}">&laquo;</a>
+                        </li>
+                        <th:block th:each="i: ${#numbers.sequence(0, page.totalPages - 1)}">
+                            <li class="page-item active" th:if="${page.number == i}" >
+                                <span class="page-link">[[${i}+1]]</span>
+                            </li>
+                            <li class="page-item" th:unless="${page.number == i}">
+                                <a class="page-link" th:href="@{/products(page=${i},size=${page.size}, sort=${sortParam})}">[[${i}+1]]</a>
+                            </li>
 
+                        </th:block>
+                        <li class="page-item" th:if="${page.hasNext()}">
+                            <a class="page-link" th:href="@{/products(page=${page.number}+1, size=${page.size}, sort=${sortParam})}">&raquo;</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </div>
         <!-- End of Main Content -->
 
         <!-- Footer -->
-        <div th:replace="~{dynamic/footer}"></div>
+        <div th:replace="~{dynamic/footer::footer}"></div>
         <!-- End of Footer -->
 
     </div>
@@ -61,6 +78,7 @@
 
 <!-- scripts-->
 <div th:replace="~{dynamic/js::scripts}"></div>
+
 
 </body>
 

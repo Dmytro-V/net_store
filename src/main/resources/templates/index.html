@@ -6,7 +6,6 @@
 
 <div th:replace="~{dynamic/header}"></div>
 
-
 <body id="page-top">
 
 <!-- Page Wrapper -->
@@ -94,16 +93,14 @@
                     </div>
                 </div>
 
-
             </div>
             <!-- /.container-fluid -->
-
 
         </div>
         <!-- End of Main Content -->
 
         <!-- Footer -->
-        <div th:replace="~{dynamic/footer}"></div>
+        <div th:replace="~{dynamic/footer::footer}"></div>
         <!-- End of Footer -->
 
     </div>
@@ -111,11 +108,6 @@
 
 </div>
 <!-- End of Page Wrapper -->
-
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
 
 <!-- scripts-->
 <div th:replace="~{dynamic/js::scripts}"></div>

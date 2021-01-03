@@ -24,7 +24,7 @@
             <!-- Begin Page Content -->
             <div class="container-fluid">
 
-                <form name="send" method="post" th:action="@{/addNewProduct}" th:object="${product}"        >
+                <form name="send" method="post" th:action="@{/addNewProduct}" th:object="${product}">
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
 
@@ -49,7 +49,6 @@
                                                             <p th:text="${child.getName()}"></p>
                                                             <p th:insert="~{::getTreeChildren (${child})}">
                                                         </option>
-
                                                     </optgroup>
                                                 </select>
                                              </div>
@@ -73,14 +72,12 @@
                                                 <input id="icon" class="form-control" name="icon" type="text" placeholder="write url icon">
                                             </div>
                                         </div>
-
                                         <div class="form-group row">
                                             <label for="price" class="col-2 col-form-label">Price</label>
                                             <div class="col-10">
                                                 <input id = "price" class="form-control" name="price" type="text" placeholder="0.00">
                                             </div>
                                         </div>
-
                                         <div class="form-group row">
                                             <label for="quantity" class="col-2 col-form-label">Quantity</label>
                                             <div class="col-10">
@@ -105,7 +102,7 @@
         <!-- End of Main Content -->
 
         <!-- Footer -->
-        <div th:replace="~{dynamic/footer}"></div>
+        <div th:replace="~{dynamic/footer::footer}"></div>
         <!-- End of Footer -->
 
     </div>

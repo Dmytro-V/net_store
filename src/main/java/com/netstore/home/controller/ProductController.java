@@ -6,6 +6,10 @@ import com.netstore.home.service.CategoryService;
 import com.netstore.home.service.ProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Controller
@@ -28,9 +33,17 @@ public class ProductController {
     }
 
     @GetMapping(value = {"/products"})
-    public String getProducts(Model model) {
-        List<Product> productsList = productService.findAll();
-        model.addAttribute("products", productsList);
+    public String getProducts(Model model, @PageableDefault(size=6, sort = "title", direction = Sort.Direction.ASC) Pageable pageable) {
+        Page<Product> pageProducts = productService.findAll(pageable);
+        model.addAttribute("page", pageProducts);
+
+        List<Sort.Order> sortOrders = pageProducts.getSort().stream().collect(Collectors.toList());
+        if (sortOrders.size() > 0) {
+            Sort.Order sortOrder = sortOrders.get(0);
+            model.addAttribute("sortProperty", sortOrder.getProperty());
+            model.addAttribute("sortDesc", sortOrder.getDirection() == Sort.Direction.DESC);
+        }
+
         return "products/products";
     }
 

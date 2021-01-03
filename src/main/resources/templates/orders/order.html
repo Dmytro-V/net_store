@@ -25,15 +25,15 @@
                 <h2>Order</h2>
                 <div class="row">
                     <label class="col-sm-2" for="username">Username:</label>
-                    <div class="col-sm-8" id="username" scope="col" th:text="${order.getUserName()}">username</div>
+                    <div class="col-sm-8" id="username" th:text="${order.getUserName()}">username</div>
                 </div>
                 <div class="row">
                     <label class="col-sm-2" for="creation_data">created:</label>
-                    <div class="col-sm-8" id="creation_data" scope="col" th:text="${#dates.format( order.getCreationDate() , 'yyyy-MM-dd HH:mm:ss')}">date</div>
+                    <div class="col-sm-8" id="creation_data" th:text="${#dates.format( order.getCreationDate() , 'yyyy-MM-dd HH:mm:ss')}">date</div>
                 </div>
                 <div class="row">
                     <label class="col-sm-2" for="status">status:</label>
-                    <div class="col-sm-8" id="status" scope="col" th:text="${order.getOrderStatus()}">order_status</div>
+                    <div class="col-sm-8" id="status" th:text="${order.getOrderStatus()}">order_status</div>
 
                     <a  class="btn btn-primary btn-block col-sm-2" th:unless="${order.getOrderStatus()} == ${orderFinished}" th:href="@{/order/{id}/setFinished(id=${order.getId()})}" >finish</a>
 
@@ -69,7 +69,7 @@
         <!-- End of Main Content -->
 
         <!-- Footer -->
-        <div th:replace="~{dynamic/footer}"></div>
+        <div th:replace="~{dynamic/footer::footer}"></div>
         <!-- End of Footer -->
 
     </div>

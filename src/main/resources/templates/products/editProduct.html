@@ -23,7 +23,6 @@
             <!-- Begin Page Content -->
             <div class="container-fluid">
 
-
                 <form name="send" method="post" th:action="@{/updateProduct(id=${product.getId()})}" th:object="${product}">
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
@@ -96,7 +95,7 @@
         <!-- End of Main Content -->
 
         <!-- Footer -->
-        <div th:replace="~{dynamic/footer}"></div>
+        <div th:replace="~{dynamic/footer::footer}"></div>
         <!-- End of Footer -->
 
     </div>
