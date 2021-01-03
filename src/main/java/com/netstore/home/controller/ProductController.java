@@ -33,7 +33,7 @@ public class ProductController {
     }
 
     @GetMapping(value = {"/products"})
-    public String getProducts(Model model, @PageableDefault(size=6, sort = "title", direction = Sort.Direction.ASC) Pageable pageable) {
+    public String getProducts(Model model, @PageableDefault(size=9, sort = "title", direction = Sort.Direction.ASC) Pageable pageable) {
         Page<Product> pageProducts = productService.findAll(pageable);
         model.addAttribute("page", pageProducts);
 
