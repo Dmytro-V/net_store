@@ -1,17 +1,32 @@
 package com.netstore.home.controller;
 
-import org.springframework.security.access.prepost.PreAuthorize;
+import com.netstore.home.model.Product;
+import com.netstore.home.service.ProductService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
+@Slf4j
 @Controller
 public class MainController {
 
+    private final  ProductService productService;
+
+    public MainController(ProductService productService) {
+        this.productService = productService;
+    }
+
+
     @GetMapping({"/", "/index"})
-    public String getHome() {
+    public String getHome(Model model) {
+
+        List<Product> mostQuantityProduct = productService.findMostQuantity();
+        log.info("list  of mostQuantityProduct size= " + mostQuantityProduct.size());
+        model.addAttribute("products", mostQuantityProduct);
+
         return "index";
     }
 
