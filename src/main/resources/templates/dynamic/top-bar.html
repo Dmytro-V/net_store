@@ -58,7 +58,7 @@
             <!--/* for User */-->
             <li class="nav-item active" th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
                 <a class="nav-link" th:href="@{/cart}" >Cart
-                    <span class="badge badge-light" th:text="${cart}"></span>
+                    <span class="badge badge-light" th:text="${cartSize}?${cartSize}"></span>
                 </a>
             </li>
 

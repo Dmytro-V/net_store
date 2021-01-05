@@ -33,6 +33,11 @@ public class UserController {
         this.cart = cart;
     }
 
+    @ModelAttribute("cartSize")
+    public int getCartSize() {
+        return cart.getLinesForOrder().size();
+    }
+
     @GetMapping(value = "/newUser")
     public String addUser() {
         return "auth/newUser";
@@ -93,9 +98,7 @@ public class UserController {
         model.addAttribute("user", user);
         model.addAttribute("roles", Role.values());
         model.addAttribute("statuses", Status.values());
-        if (!cart.getLinesForOrder().isEmpty()) {
-            model.addAttribute("cart", cart.getLinesForOrder().size());
-        }
+
         return "auth/profile";
     }
 

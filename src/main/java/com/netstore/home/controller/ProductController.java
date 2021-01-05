@@ -35,6 +35,11 @@ public class ProductController {
         this.cart = cart;
     }
 
+    @ModelAttribute("cartSize")
+    public int getCartSize() {
+        return cart.getLinesForOrder().size();
+    }
+
     @GetMapping(value = {"/products"})
     public String getProducts(Model model, @PageableDefault(size=9, sort = "title", direction = Sort.Direction.ASC) Pageable pageable) {
         List<Product> mostQuantityProduct = productService.findMostQuantity();
@@ -51,10 +56,6 @@ public class ProductController {
             model.addAttribute("sortDesc", sortOrder.getDirection() == Sort.Direction.DESC);
         }
 
-        if (!cart.getLinesForOrder().isEmpty()) {
-            model.addAttribute("cart", cart.getLinesForOrder().size());
-        }
-
         return "products/products";
     }
 
@@ -63,10 +64,6 @@ public class ProductController {
         Optional<Product> find = productService.findById(id);
         if (find.isPresent()) {
             model.addAttribute("product", find.get());
-        }
-
-        if (!cart.getLinesForOrder().isEmpty()) {
-            model.addAttribute("cart", cart.getLinesForOrder().size());
         }
 
         return "products/product";
