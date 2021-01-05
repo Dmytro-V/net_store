@@ -6,16 +6,20 @@ import com.netstore.home.service.OrderService;
 import com.netstore.home.service.ProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.annotation.SessionScope;
 
 import java.security.Principal;
 import java.util.Date;
@@ -41,6 +45,10 @@ public class OrderController {
         this.orderService = orderService;
     }
 
+    @ModelAttribute("cartSize")
+    public int getCartSize() {
+        return cart.getLinesForOrder().size();
+    }
 
     @PreAuthorize("hasRole('USER')")
     @GetMapping("/cart")
@@ -104,8 +112,8 @@ public class OrderController {
         log.info("in getUserOrders");
 
         Page<Order> orders = orderService.findByUserName(principal.getName(), pageable);
-
         model.addAttribute("page", orders);
+
         return "orders/userOrders";
     }
 
