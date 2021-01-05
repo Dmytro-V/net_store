@@ -25,10 +25,12 @@ import java.util.stream.Collectors;
 public class UserController {
 
     private final UserService userService;
+    private final Cart cart;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, Cart cart) {
         this.userService = userService;
+        this.cart = cart;
     }
 
     @GetMapping(value = "/newUser")
@@ -91,6 +93,9 @@ public class UserController {
         model.addAttribute("user", user);
         model.addAttribute("roles", Role.values());
         model.addAttribute("statuses", Status.values());
+        if (!cart.getLinesForOrder().isEmpty()) {
+            model.addAttribute("cart", cart.getLinesForOrder().size());
+        }
         return "auth/profile";
     }
 

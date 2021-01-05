@@ -1,5 +1,6 @@
 package com.netstore.home.controller;
 
+import com.netstore.home.model.Cart;
 import com.netstore.home.model.Category;
 import com.netstore.home.model.Product;
 import com.netstore.home.service.CategoryService;
@@ -25,15 +26,21 @@ public class ProductController {
 
     private final ProductService productService;
     private final CategoryService categoryService;
+    private final Cart cart;
 
     @Autowired
-    public ProductController(ProductService productService, CategoryService categoryService) {
+    public ProductController(ProductService productService, CategoryService categoryService, Cart cart) {
         this.productService = productService;
         this.categoryService = categoryService;
+        this.cart = cart;
     }
 
     @GetMapping(value = {"/products"})
     public String getProducts(Model model, @PageableDefault(size=9, sort = "title", direction = Sort.Direction.ASC) Pageable pageable) {
+        List<Product> mostQuantityProduct = productService.findMostQuantity();
+        log.info("list  of mostQuantityProduct size= " + mostQuantityProduct.size());
+        model.addAttribute("products", mostQuantityProduct);
+
         Page<Product> pageProducts = productService.findAll(pageable);
         model.addAttribute("page", pageProducts);
 
@@ -44,6 +51,10 @@ public class ProductController {
             model.addAttribute("sortDesc", sortOrder.getDirection() == Sort.Direction.DESC);
         }
 
+        if (!cart.getLinesForOrder().isEmpty()) {
+            model.addAttribute("cart", cart.getLinesForOrder().size());
+        }
+
         return "products/products";
     }
 
@@ -52,6 +63,10 @@ public class ProductController {
         Optional<Product> find = productService.findById(id);
         if (find.isPresent()) {
             model.addAttribute("product", find.get());
+        }
+
+        if (!cart.getLinesForOrder().isEmpty()) {
+            model.addAttribute("cart", cart.getLinesForOrder().size());
         }
 
         return "products/product";

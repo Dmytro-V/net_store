@@ -47,6 +47,9 @@ public class OrderController {
     public String getCart(Model model) {
         List<LineOrder> linesForOrder = cart.getLinesForOrder();
         model.addAttribute("linesForOrder", linesForOrder);
+        if (!cart.getLinesForOrder().isEmpty()) {
+            model.addAttribute("cart", cart.getLinesForOrder().size());
+        }
 
         return "orders/cart";
     }
@@ -104,8 +107,10 @@ public class OrderController {
         log.info("in getUserOrders");
 
         Page<Order> orders = orderService.findByUserName(principal.getName(), pageable);
-
         model.addAttribute("page", orders);
+        if (!cart.getLinesForOrder().isEmpty()) {
+            model.addAttribute("cart", cart.getLinesForOrder().size());
+        }
         return "orders/userOrders";
     }
 

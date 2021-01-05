@@ -1,37 +1,33 @@
 package com.netstore.home.controller;
 
-import com.netstore.home.model.Product;
-import com.netstore.home.service.ProductService;
+import com.netstore.home.model.Cart;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.util.List;
-
 @Slf4j
 @Controller
 public class MainController {
 
-    private final  ProductService productService;
+    private final Cart cart;
 
-    public MainController(ProductService productService) {
-        this.productService = productService;
+    public MainController(Cart cart) {
+        this.cart = cart;
     }
 
 
     @GetMapping({"/", "/index"})
-    public String getHome(Model model) {
+    public String getHome() {
 
-        List<Product> mostQuantityProduct = productService.findMostQuantity();
-        log.info("list  of mostQuantityProduct size= " + mostQuantityProduct.size());
-        model.addAttribute("products", mostQuantityProduct);
-
-        return "index";
+        return "redirect:/products";
     }
 
     @GetMapping("/about")
-    public String getAbout() {
+    public String getAbout(Model model) {
+        if (!cart.getLinesForOrder().isEmpty()) {
+            model.addAttribute("cart", cart.getLinesForOrder().size());
+        }
         return "about";
     }
 
