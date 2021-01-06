@@ -29,6 +29,7 @@
                         <th scope="col">product</th>
                         <th scope="col">price</th>
                         <th scope="col">quantity</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -36,13 +37,18 @@
                         <td th:text="${lineOrder.getProduct().getTitle()}"></td>
                         <td th:text="${lineOrder.getProduct().getPrice()}"></td>
                         <td th:text="${lineOrder.getQuantity()}"></td>
+                        <td>
+                            <a role="button" class="btn btn-danger btn-circle" th:href="@{/deleteLine/{index}(index=${linesForOrder.indexOf(lineOrder)})}" >
+                                delete
+                            </a>
+                        </td>
                     </tr>
                     <tr class="bg-info">
                         <th scope="col">total cost</th>
                         <td th:text="${totalCostOfCart}"></td>
-
+                        <td></td>
+                        <td></td>
                     </tr>
-
                     </tbody>
                 </table>
 

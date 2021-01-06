@@ -15,10 +15,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.annotation.SessionScope;
 
 import java.math.BigDecimal;
@@ -35,8 +32,6 @@ public class OrderController {
     private final ProductService productService;
     private final Cart cart;
     private final OrderService orderService;
-
-
 
     @Autowired
     public OrderController(LineOrderService lineOrderService, ProductService productService, Cart cart, OrderService orderService) {
@@ -56,9 +51,16 @@ public class OrderController {
     public String getCart(Model model) {
         List<LineOrder> linesForOrder = cart.getLinesForOrder();
         model.addAttribute("linesForOrder", linesForOrder);
-
         model.addAttribute("totalCostOfCart", cart.getTotalCost());
         return "orders/cart";
+    }
+
+    @PreAuthorize("hasRole('USER')")
+    @GetMapping("/deleteLine/{index}")
+    public String deleteLine(@PathVariable("index") int index) {
+        List<LineOrder> linesForOrder = cart.getLinesForOrder();
+        linesForOrder.remove(index);
+        return "redirect:/cart";
     }
 
     @PreAuthorize("hasRole('USER')")
