@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.annotation.SessionScope;
 
+import java.math.BigDecimal;
 import java.security.Principal;
 import java.util.Date;
 import java.util.List;
@@ -56,6 +57,7 @@ public class OrderController {
         List<LineOrder> linesForOrder = cart.getLinesForOrder();
         model.addAttribute("linesForOrder", linesForOrder);
 
+        model.addAttribute("totalCostOfCart", cart.getTotalCost());
         return "orders/cart";
     }
 

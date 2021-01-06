@@ -37,6 +37,11 @@
                         <td th:text="${lineOrder.getProduct().getPrice()}"></td>
                         <td th:text="${lineOrder.getQuantity()}"></td>
                     </tr>
+                    <tr class="bg-info">
+                        <th scope="col">total cost</th>
+                        <td th:text="${totalCostOfCart}"></td>
+
+                    </tr>
 
                     </tbody>
                 </table>
