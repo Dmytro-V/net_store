@@ -6,7 +6,6 @@ import com.netstore.home.model.Product;
 import com.netstore.home.service.CategoryService;
 import com.netstore.home.service.ProductService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -28,7 +27,6 @@ public class ProductController {
     private final CategoryService categoryService;
     private final Cart cart;
 
-    @Autowired
     public ProductController(ProductService productService, CategoryService categoryService, Cart cart) {
         this.productService = productService;
         this.categoryService = categoryService;

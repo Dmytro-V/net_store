@@ -1,9 +1,11 @@
 package com.netstore.home.controller;
 
-import com.netstore.home.model.*;
+import com.netstore.home.model.Cart;
+import com.netstore.home.model.Role;
+import com.netstore.home.model.Status;
+import com.netstore.home.model.User;
 import com.netstore.home.service.UserService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -27,7 +29,6 @@ public class UserController {
     private final UserService userService;
     private final Cart cart;
 
-    @Autowired
     public UserController(UserService userService, Cart cart) {
         this.userService = userService;
         this.cart = cart;

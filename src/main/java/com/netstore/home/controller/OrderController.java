@@ -5,7 +5,6 @@ import com.netstore.home.service.LineOrderService;
 import com.netstore.home.service.OrderService;
 import com.netstore.home.service.ProductService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -33,7 +32,6 @@ public class OrderController {
     private final Cart cart;
     private final OrderService orderService;
 
-    @Autowired
     public OrderController(LineOrderService lineOrderService, ProductService productService, Cart cart, OrderService orderService) {
         this.lineOrderService = lineOrderService;
         this.productService = productService;

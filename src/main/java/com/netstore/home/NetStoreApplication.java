@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class NetstoreApplication {
+public class NetStoreApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(NetstoreApplication.class, args);
+        SpringApplication.run(NetStoreApplication.class, args);
     }
 
 }
