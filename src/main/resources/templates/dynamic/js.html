@@ -15,6 +15,14 @@
     <script th:src="@{../webjars/jquery/3.5.1/jquery.min.js}"></script>
     <script th:src="@{../webjars/bootstrap/4.5.3/js/bootstrap.bundle.js}"></script>
 
+    <script>
+        /*<![CDATA[*/
+        $(document).ready(function(){
+            $("#content_weather").load("/weather");
+        });
+        /*]]>*/
+    </script>
+
 
 </th:block>
 

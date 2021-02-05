@@ -4,6 +4,7 @@ import com.netstore.home.model.Cart;
 import com.netstore.home.model.Role;
 import com.netstore.home.model.Status;
 import com.netstore.home.model.User;
+import com.netstore.home.model.weather.ForecastDto;
 import com.netstore.home.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -26,17 +27,30 @@ import java.util.stream.Collectors;
 @Controller
 public class UserController {
 
-    private final UserService userService;
     private final Cart cart;
+    private final UserService userService;
 
-    public UserController(UserService userService, Cart cart) {
+    private final ForecastDto forecastDto;
+
+    public UserController(UserService userService, Cart cart, ForecastDto forecastDto) {
         this.userService = userService;
         this.cart = cart;
+        this.forecastDto = forecastDto;
     }
 
     @ModelAttribute("cartSize")
     public int getCartSize() {
         return cart.getLinesForOrder().size();
+    }
+
+    @ModelAttribute("forecastCity")
+    public String getForecastCity(){
+        return forecastDto.getCity();
+    }
+
+    @ModelAttribute("forecastTemp")
+    public int getForecastTemp(){
+        return forecastDto.getTemp();
     }
 
     @GetMapping(value = "/newUser")

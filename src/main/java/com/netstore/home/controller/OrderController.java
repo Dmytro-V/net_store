@@ -1,6 +1,7 @@
 package com.netstore.home.controller;
 
 import com.netstore.home.model.*;
+import com.netstore.home.model.weather.ForecastDto;
 import com.netstore.home.service.LineOrderService;
 import com.netstore.home.service.OrderService;
 import com.netstore.home.service.ProductService;
@@ -31,17 +32,29 @@ public class OrderController {
     private final ProductService productService;
     private final Cart cart;
     private final OrderService orderService;
+    private final ForecastDto forecastDto;
 
-    public OrderController(LineOrderService lineOrderService, ProductService productService, Cart cart, OrderService orderService) {
+    public OrderController(LineOrderService lineOrderService, ProductService productService, Cart cart, OrderService orderService, ForecastDto forecastDto) {
         this.lineOrderService = lineOrderService;
         this.productService = productService;
         this.cart = cart;
         this.orderService = orderService;
+        this.forecastDto = forecastDto;
     }
 
     @ModelAttribute("cartSize")
     public int getCartSize() {
         return cart.getLinesForOrder().size();
+    }
+
+    @ModelAttribute("forecastCity")
+    public String getForecastCity(){
+        return forecastDto.getCity();
+    }
+
+    @ModelAttribute("forecastTemp")
+    public int getForecastTemp(){
+        return forecastDto.getTemp();
     }
 
     @PreAuthorize("hasRole('USER')")

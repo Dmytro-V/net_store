@@ -82,8 +82,21 @@
                     <a class="dropdown-item" th:href="@{/auth/logout}">Logout</a>
                 </div>
             </li>
+            <li id="content_weather" sec:authorize="isAuthenticated()"></li>
         </ul>
     </div>
 </nav>
+
+<th:block th:fragment="content_weather">
+                <li class="nav-item active">
+                    <span class="nav-link ">
+                        <span class="badge badge-light">
+                            <span th:text="${content_name}"></span>
+                            <span th:text="${content_temp}"></span>
+                            °C
+                        </span>
+                    </span>
+                </li>
+</th:block>
 
 </body>
