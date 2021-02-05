@@ -88,7 +88,7 @@
 </nav>
 
 <th:block th:fragment="content_weather">
-                <li class="nav-item active">
+                <li class="nav-item active" th:if="${content_name}">
                     <span class="nav-link ">
                         <span class="badge badge-light">
                             <span th:text="${content_name}"></span>
