@@ -39,4 +39,8 @@ public class ProductService {
     public List<Product> findMostQuantity() {
        return productRepository.findAll(Sort.by(Sort.Direction.DESC, "quantity")).subList(0,3);
     }
+
+    public Optional<Product> findByTitle(String title) {
+       return productRepository.findByTitle(title);
+    }
 }

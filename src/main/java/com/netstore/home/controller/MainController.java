@@ -21,13 +21,11 @@ import java.util.Optional;
 public class MainController {
 
     private final Cart cart;
-    private final ForecastDto forecastDto;
     private final UserService userService;
     private final WeatherService weatherService;
 
-    public MainController(Cart cart, ForecastDto forecastDto, UserService userService, WeatherService weatherService) {
+    public MainController(Cart cart, UserService userService, WeatherService weatherService) {
         this.cart = cart;
-        this.forecastDto = forecastDto;
         this.userService = userService;
         this.weatherService = weatherService;
     }
@@ -35,16 +33,6 @@ public class MainController {
     @ModelAttribute("cartSize")
     public int getCartSize() {
         return cart.getLinesForOrder().size();
-    }
-
-    @ModelAttribute("forecastCity")
-    public String getForecastCity(){
-        return forecastDto.getCity();
-    }
-
-    @ModelAttribute("forecastTemp")
-    public int getForecastTemp(){
-        return forecastDto.getTemp();
     }
 
     @GetMapping({"/", "/index"})
@@ -70,7 +58,7 @@ public class MainController {
     }
 
     @GetMapping("/weather")
-    public String frag1(Principal principal, Model model) {
+    public String getWeather(Principal principal, Model model) {
         if (principal != null) {
             Optional<User> user = userService.findByName(principal.getName());
             if (user.isPresent()) {
@@ -85,6 +73,5 @@ public class MainController {
         }
         return "dynamic/top-bar::content_weather";
     }
-
 
 }

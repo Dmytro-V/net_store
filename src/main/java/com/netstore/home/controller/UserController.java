@@ -30,27 +30,14 @@ public class UserController {
     private final Cart cart;
     private final UserService userService;
 
-    private final ForecastDto forecastDto;
-
-    public UserController(UserService userService, Cart cart, ForecastDto forecastDto) {
+    public UserController(UserService userService, Cart cart) {
         this.userService = userService;
         this.cart = cart;
-        this.forecastDto = forecastDto;
     }
 
     @ModelAttribute("cartSize")
     public int getCartSize() {
         return cart.getLinesForOrder().size();
-    }
-
-    @ModelAttribute("forecastCity")
-    public String getForecastCity(){
-        return forecastDto.getCity();
-    }
-
-    @ModelAttribute("forecastTemp")
-    public int getForecastTemp(){
-        return forecastDto.getTemp();
     }
 
     @GetMapping(value = "/newUser")
