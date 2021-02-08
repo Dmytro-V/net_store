@@ -38,7 +38,7 @@ class ProductRepositoryIntegrationTest {
     }
 
     @Test
-    public void whenFindByAll() {
+    public void whenFindByAll_thenReturnAllProducts() {
         //given
         Product product1 = new Product();
         Product product2 = new Product();
@@ -54,7 +54,6 @@ class ProductRepositoryIntegrationTest {
 
         //then
         assertThat(products.getTotalElements()).isEqualTo(3L);
-
     }
     
 }

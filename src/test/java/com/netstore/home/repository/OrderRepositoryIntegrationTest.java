@@ -1,8 +1,6 @@
 package com.netstore.home.repository;
 
 import com.netstore.home.model.Order;
-import com.netstore.home.model.Product;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -14,7 +12,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -29,7 +26,7 @@ class OrderRepositoryIntegrationTest {
     private Pageable pageable;
 
     @BeforeEach
-    void setOrders() {
+    void setUp() {
         //given
         Order order1 = new Order();
         order1.setUserName("user1");

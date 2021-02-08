@@ -40,7 +40,4 @@ public class ProductService {
        return productRepository.findAll(Sort.by(Sort.Direction.DESC, "quantity")).subList(0,3);
     }
 
-    public Optional<Product> findByTitle(String title) {
-       return productRepository.findByTitle(title);
-    }
 }
