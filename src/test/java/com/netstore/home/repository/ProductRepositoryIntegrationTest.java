@@ -23,18 +23,26 @@ class ProductRepositoryIntegrationTest {
     private ProductRepository productRepository;
 
     @Test
-    public void whenFindByTitle_thenReturnProduct() {
+    public void whenFindByTitle_thenReturnProducts() {
         //given
-        Product testProduct = new Product();
-        testProduct.setTitle("Test product");
-        entityManager.persist(testProduct);
+        Product product1 = new Product();
+        Product product2 = new Product();
+        Product product3 = new Product();
+        product1.setTitle("Test product1");
+        product2.setTitle("Test product2");
+        product3.setTitle("product3");
+
+        entityManager.persist(product1);
+        entityManager.persist(product2);
+        entityManager.persist(product3);
         entityManager.flush();
+        Pageable pageable = Pageable.unpaged();
 
         //when
-        Product found = productRepository.findByTitle("Test product").get();
+        Page<Product> found = productRepository.findByTitleContaining("Test", pageable);
 
         //then
-        assertThat(found.getTitle()).isEqualTo(testProduct.getTitle());
+        assertThat(found.getTotalElements()).isEqualTo(2L);
     }
 
     @Test

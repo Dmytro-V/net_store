@@ -3,13 +3,8 @@ package com.netstore.home.controller;
 import com.netstore.home.model.Cart;
 import com.netstore.home.model.Category;
 import com.netstore.home.model.Product;
-import com.netstore.home.model.User;
-import com.netstore.home.model.weather.Forecast;
-import com.netstore.home.model.weather.ForecastDto;
 import com.netstore.home.service.CategoryService;
 import com.netstore.home.service.ProductService;
-import com.netstore.home.service.UserService;
-import com.netstore.home.service.WeatherService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,8 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
-import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -47,14 +40,23 @@ public class ProductController {
 
 
     @GetMapping("/products")
-    public String getProducts(Principal principal,Model model, @PageableDefault(size = 9, sort = "title", direction = Sort.Direction.ASC) Pageable pageable) {
+    public String getProducts(@RequestParam(name = "title", required = false) String searchTitle,
+                              Model model,
+                              @PageableDefault(size = 6, sort = "title", direction = Sort.Direction.ASC) Pageable pageable) {
 
         List<Product> mostQuantityProduct = productService.findMostQuantity();
         log.info("list  of mostQuantityProduct size= " + mostQuantityProduct.size());
         model.addAttribute("products", mostQuantityProduct);
 
-        Page<Product> pageProducts = productService.findAll(pageable);
+        Page<Product> pageProducts;
+        if (searchTitle != null) {
+            pageProducts = productService.findByTitleContaining(searchTitle, pageable);
+        } else {
+            pageProducts = productService.findAll(pageable);
+        }
+
         model.addAttribute("page", pageProducts);
+        model.addAttribute("title", searchTitle);
 
         List<Sort.Order> sortOrders = pageProducts.getSort().stream().collect(Collectors.toList());
         if (sortOrders.size() > 0) {
